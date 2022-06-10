@@ -1,0 +1,9 @@
+listening for a get request at the home route endpoint, and
+display index.html
+
+listening for a post request at the api/new-game endpoint
+starting a new game and returning a JSON {game_is, board}
+
+game_id (string)
+game (runs the game, creates boggle game instance)
+games[game_id] = game
