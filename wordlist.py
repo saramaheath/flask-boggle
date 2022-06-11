@@ -12,6 +12,7 @@ class WordList:
             >>> wl.words == {'CAT', 'DOG'}
             True
         """
+        
 
         self.words = self._read_dict(dict_path)
 

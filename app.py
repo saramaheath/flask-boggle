@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, jsonify
 from uuid import uuid4
 
 from boggle import BoggleGame
+from wordlist import WordList
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "this-is-secret"
@@ -28,3 +29,25 @@ def new_game():
 
     game_info = {"gameId": game_id, "board": game.board}
     return jsonify(game_info)
+
+@app.post("/api/score-word")
+def score_word():
+    """ checks if word is legal, 
+    takes game id and the word in json, 
+    returns json response (use jsonify)"""
+
+    gameId_response = request.json['gameId']
+    word_response = request.json['word']
+    game = BoggleGame()
+    english_words = WordList("dictionary.txt")
+
+    if type(word_response) != 'string':
+        return {'result': 'not-word'}
+    if game.check_word_on_board(word_response) == False:
+        return {'result': 'not-on-board'}
+    if word_response in english_words:
+        return {'restult': 'ok'}
+
+    breakpoint()
+
+
